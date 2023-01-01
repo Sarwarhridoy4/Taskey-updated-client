@@ -27,7 +27,7 @@ const Addtask = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          console.log(imgData.data.url);
+          // console.log(imgData.data.url);
           const task = {
             name: data.name,
             email:data?.email,
@@ -36,7 +36,7 @@ const Addtask = () => {
           };
 
           // save task to the database
-          fetch("https://taskey-server-sarwarhridoy4.vercel.app/add-task", {
+          fetch("http://localhost:5000/add-task", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -45,7 +45,7 @@ const Addtask = () => {
           })
             .then((res) => res.json())
             .then((result) => {
-              console.log(result);
+              // console.log(result);
               toast.success(`${data.name} is added successfully`);
               navigate(`/my-tasks/${data.email}`);
             });

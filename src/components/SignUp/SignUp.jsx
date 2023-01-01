@@ -22,7 +22,7 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         navigate(from, { replace: true } || "/");
         toast.success("User Created Successfully.");
         const userInfo = {
@@ -47,7 +47,7 @@ const SignUp = () => {
     googleSignIn(googleProvider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         toast(`authenticated as ${user?.displayName}`);
         navigate(from, { replace: true } || "/");
       })

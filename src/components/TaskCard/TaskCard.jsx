@@ -8,13 +8,13 @@ const TaskCard = ({ task }) => {
 
   // deleting a task
   const handelDeleteTask = (_id) => {
-    console.log(task);
-    fetch(`https://taskey-server-sarwarhridoy4.vercel.app/my-task/${_id}`, {
+    // console.log(task);
+    fetch(`http://localhost:5000/my-task/${_id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         toast.success(`item deleted.`);
         navigate(`/`);
       });

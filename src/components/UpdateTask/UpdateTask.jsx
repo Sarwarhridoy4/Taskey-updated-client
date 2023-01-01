@@ -7,7 +7,7 @@ import Loading from "../Loading/Loading";
 
 const UpdateTask = () => {
   const UpdateData = useLoaderData();
-  console.log(UpdateData);
+  // console.log(UpdateData);
   const {
     register,
     handleSubmit,
@@ -19,7 +19,7 @@ const UpdateTask = () => {
 
   const handleUpdateTask = (data) => {
     const image = data.image[0];
-    console.log(data.name);
+    // console.log(data.name);
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -30,29 +30,26 @@ const UpdateTask = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          console.log(imgData.data.url);
+          // console.log(imgData.data.url);
           const task = {
             name: data.name,
             email: data?.email,
             image: imgData.data.url,
             description: data.description,
           };
-          console.log(task);
+          // console.log(task);
 
           //   save task to the database
-          fetch(
-            `https://taskey-server-sarwarhridoy4.vercel.app/add-task/${UpdateData._id}`,
-            {
-              method: "PUT",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(task),
-            }
-          )
+          fetch(`http://localhost:5000/add-task/${UpdateData._id}`, {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(task),
+          })
             .then((res) => res.json())
             .then((result) => {
-              console.log(result);
+              // console.log(result);
               toast.success(`${data.name} is updated successfully`);
               navigate(`/my-tasks/${data.email}`);
             });
