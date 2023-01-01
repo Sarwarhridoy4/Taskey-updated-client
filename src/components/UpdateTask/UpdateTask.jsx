@@ -6,8 +6,8 @@ import { AuthContext } from "../../contexts/Auth/AuthContext";
 import Loading from "../Loading/Loading";
 
 const UpdateTask = () => {
-    const UpdateData = useLoaderData()
-    console.log(UpdateData);
+  const UpdateData = useLoaderData();
+  console.log(UpdateData);
   const {
     register,
     handleSubmit,
@@ -15,11 +15,11 @@ const UpdateTask = () => {
   } = useForm();
   const imageHostKey = process.env.REACT_APP_imgbb_key;
   const navigate = useNavigate();
-  const {user,loading} = useContext(AuthContext)
+  const { user, loading } = useContext(AuthContext);
 
   const handleUpdateTask = (data) => {
-      const image = data.image[0];
-      console.log(data.name);
+    const image = data.image[0];
+    console.log(data.name);
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -33,34 +33,35 @@ const UpdateTask = () => {
           console.log(imgData.data.url);
           const task = {
             name: data.name,
-            email:data?.email,
+            email: data?.email,
             image: imgData.data.url,
             description: data.description,
-            };
-            console.log(task);
+          };
+          console.log(task);
 
-        //   save task to the database
-          fetch(`http://localhost:5000/add-task/${UpdateData._id}`, {
-            method: "PUT",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(task),
-          })
+          //   save task to the database
+          fetch(
+            `https://taskey-server-sarwarhridoy4.vercel.app/add-task/${UpdateData._id}`,
+            {
+              method: "PUT",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(task),
+            }
+          )
             .then((res) => res.json())
             .then((result) => {
               console.log(result);
               toast.success(`${data.name} is updated successfully`);
               navigate(`/my-tasks/${data.email}`);
             });
-         }
-       });
+        }
+      });
   };
 
-  
-
-  if(loading){
-      return <Loading></Loading>
+  if (loading) {
+    return <Loading></Loading>;
   }
   return (
     <section className='bg-white dark:bg-gray-900'>
@@ -94,8 +95,8 @@ const UpdateTask = () => {
             </span>
 
             <input
-                          type='text'
-                      defaultValue={UpdateData.name}
+              type='text'
+              defaultValue={UpdateData.name}
               {...register("name", {
                 required: "Task name is Required",
               })}
@@ -128,7 +129,7 @@ const UpdateTask = () => {
             <input
               type='email'
               defaultValue={user?.email}
-            readOnly
+              readOnly
               {...register("email", {
                 required: "Task name is Required",
               })}
@@ -159,12 +160,13 @@ const UpdateTask = () => {
               />
             </svg>
 
-            <h2 className='mx-3 text-gray-400'><img className="w-52 h-20" src={UpdateData.image} alt="" /></h2>
+            <h2 className='mx-3 text-gray-400'>
+              <img className='w-52 h-20' src={UpdateData.image} alt='' />
+            </h2>
 
             <input
               id='dropzone-file'
-                          type='file'
-                          
+              type='file'
               {...register("image", {
                 required: "Image is Required",
               })}
@@ -175,8 +177,8 @@ const UpdateTask = () => {
 
           <div className='relative flex items-center mt-6'>
             <textarea
-                          type='text'
-                          defaultValue={UpdateData.description}
+              type='text'
+              defaultValue={UpdateData.description}
               {...register("description", {
                 required: "Description is Required",
               })}
@@ -189,7 +191,11 @@ const UpdateTask = () => {
           </div>
 
           <div className='mt-6'>
-            <input value="Update Task" type="submit" className='w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50'/>
+            <input
+              value='Update Task'
+              type='submit'
+              className='w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50'
+            />
           </div>
         </form>
       </div>
