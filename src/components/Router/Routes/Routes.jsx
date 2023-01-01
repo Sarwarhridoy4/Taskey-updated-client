@@ -4,11 +4,11 @@ import Addtask from "../../AddTask/Addtask";
 import Error from "../../Error/Error";
 import Home from "../../Home/Home";
 import MyTask from "../../MyTask/MyTask";
-// import ComplpletedTask from "../../CompletedTask/CompletedTask";
+import CompletedTask from "../../CompletedTask/CompletedTask";
 import Login from "../../Login/Login";
 import SignUp from "../../SignUp/SignUp";
 import Private from "../Private/Private";
-import ComingSoon from "../../Coming Soon/ComingSoon"
+import UpdateTask from "../../UpdateTask/UpdateTask";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -28,14 +28,24 @@ const router = createBrowserRouter([
                 loader: async ({ params }) => {
                     // console.log(params);
                     return fetch(
-                      `https://taskey-server-sarwarhridoy4.vercel.app/my-task/${params.email}`
+                      `http://localhost:5000/my-task/${params.email}`
                     );
                   },
                 element:<Private><MyTask></MyTask></Private>
             },
             {
+                path: "/my-tasks/update/:id",
+                loader: async ({ params }) => {
+                    // console.log(params);
+                    return fetch(
+                      `http://localhost:5000/update-task/${params.id}`
+                    );
+                  },
+                element:<UpdateTask></UpdateTask>
+            },
+            {
                 path: "/completed-task",
-                element:<ComingSoon></ComingSoon>
+                element:<CompletedTask></CompletedTask>
             },
             {
                 path: "/login",
