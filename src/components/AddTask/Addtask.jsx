@@ -13,7 +13,7 @@ const Addtask = () => {
   } = useForm();
   const imageHostKey = process.env.REACT_APP_imgbb_key;
   const navigate = useNavigate();
-  const {user,loading} = useContext(AuthContext)
+  const { user, loading } = useContext(AuthContext);
 
   const handleAddTask = (data) => {
     const image = data.image[0];
@@ -30,13 +30,13 @@ const Addtask = () => {
           // console.log(imgData.data.url);
           const task = {
             name: data.name,
-            email:data?.email,
+            email: data?.email,
             image: imgData.data.url,
             description: data.description,
           };
 
           // save task to the database
-          fetch("http://localhost:5000/add-task", {
+          fetch("https://taskey-server-sarwarhridoy4.vercel.app/add-task", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -53,10 +53,8 @@ const Addtask = () => {
       });
   };
 
-  
-
-  if(loading){
-      return <Loading></Loading>
+  if (loading) {
+    return <Loading></Loading>;
   }
   return (
     <section className='bg-white dark:bg-gray-900'>
@@ -123,7 +121,7 @@ const Addtask = () => {
             <input
               type='email'
               defaultValue={user?.email}
-            readOnly
+              readOnly
               {...register("email", {
                 required: "Task name is Required",
               })}
@@ -182,7 +180,11 @@ const Addtask = () => {
           </div>
 
           <div className='mt-6'>
-            <input value="Add Task" type="submit" className='w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50'/>
+            <input
+              value='Add Task'
+              type='submit'
+              className='w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50'
+            />
           </div>
         </form>
       </div>

@@ -40,7 +40,7 @@ const UpdateTask = () => {
           // console.log(task);
 
           //   save task to the database
-          fetch(`http://localhost:5000/add-task/${UpdateData._id}`, {
+          fetch(`https://taskey-server-sarwarhridoy4.vercel.app/add-task/${UpdateData._id}`, {
             method: "PUT",
             headers: {
               "content-type": "application/json",

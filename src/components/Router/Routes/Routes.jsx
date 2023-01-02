@@ -31,7 +31,9 @@ const router = createBrowserRouter([
         path: "/my-tasks/:email",
         loader: async ({ params }) => {
           // console.log(params);
-          return fetch(`http://localhost:5000/my-task/${params.email}`);
+          return fetch(
+            `https://taskey-server-sarwarhridoy4.vercel.app/my-task/${params.email}`
+          );
         },
         element: (
           <Private>
@@ -43,7 +45,9 @@ const router = createBrowserRouter([
         path: "/my-tasks/update/:id",
         loader: async ({ params }) => {
           // console.log(params);
-          return fetch(`http://localhost:5000/update-task/${params.id}`);
+          return fetch(
+            `https://taskey-server-sarwarhridoy4.vercel.app/update-task/${params.id}`
+          );
         },
         element: <UpdateTask></UpdateTask>,
       },

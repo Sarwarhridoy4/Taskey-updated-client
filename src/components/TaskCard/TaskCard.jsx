@@ -9,7 +9,7 @@ const TaskCard = ({ task }) => {
   // deleting a task
   const handelDeleteTask = (_id) => {
     // console.log(task);
-    fetch(`http://localhost:5000/my-task/${_id}`, {
+    fetch(`https://taskey-server-sarwarhridoy4.vercel.app/my-task/${_id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
